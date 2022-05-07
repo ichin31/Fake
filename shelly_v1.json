@@ -1,0 +1,971 @@
+[
+    {
+        "id": "a8b6119049c959c4",
+        "type": "tab",
+        "label": "Main UI Dashboard",
+        "disabled": false,
+        "info": "This is the flow for all the shelly devices",
+        "env": []
+    },
+    {
+        "id": "bdd117013455c561",
+        "type": "debug",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "9e7eceea6742a0f9",
+        "type": "shelly-gen2",
+        "z": "a8b6119049c959c4",
+        "hostname": "192.168.1.8",
+        "description": "",
+        "pollinginterval": "2000",
+        "pollstatus": false,
+        "getstatusoncommand": false,
+        "devicetype": "Relay",
+        "outputs": 1,
+        "x": 330,
+        "y": 520,
+        "wires": [
+            [
+                "bdd117013455c561"
+            ]
+        ]
+    },
+    {
+        "id": "7e7cd8abc596bf2a",
+        "type": "ui_switch",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "label": "Plus 1 Control",
+        "tooltip": "Toggle on and off Shelly 1",
+        "group": "6d3515b467517025",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "payload",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"method\":\"Switch.Set\",\"parameters\":{\"id\":0,\"on\":false,\"toggle_after\":2}}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"method\":\"Switch.Set\",\"parameters\":{\"id\":0,\"on\":true,\"toggle_after\":2}}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 80,
+        "y": 520,
+        "wires": [
+            [
+                "a3b7975b9bd3d0ab",
+                "9e7eceea6742a0f9"
+            ]
+        ]
+    },
+    {
+        "id": "f58642b393b12371",
+        "type": "inject",
+        "z": "a8b6119049c959c4",
+        "name": "Get Status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 600,
+        "wires": [
+            [
+                "9e7eceea6742a0f9"
+            ]
+        ]
+    },
+    {
+        "id": "020f2d1846e9f985",
+        "type": "comment",
+        "z": "a8b6119049c959c4",
+        "name": "Shelly Plus 1 PM",
+        "info": "",
+        "x": 80,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "dca1211397c80ad0",
+        "type": "comment",
+        "z": "a8b6119049c959c4",
+        "name": "Shelly Plus 1  Needs Work",
+        "info": "",
+        "x": 110,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2b22dd21ed0fdce4",
+        "type": "comment",
+        "z": "a8b6119049c959c4",
+        "name": "Shelly Motion",
+        "info": "",
+        "x": 70,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "310495ceb959b6b7",
+        "type": "comment",
+        "z": "a8b6119049c959c4",
+        "name": "Shelly H&T",
+        "info": "",
+        "x": 60,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "cdc2d33ef6128c1c",
+        "type": "mqtt in",
+        "z": "a8b6119049c959c4",
+        "name": "Motion",
+        "topic": "shellies/shellymotionsensor-60A423BEB6CA/status",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "e9e9357ddad63bd3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 50,
+        "y": 740,
+        "wires": [
+            [
+                "e92f3c43c910049f",
+                "6c72e164d03c65d5",
+                "758b0ca373f2a73d",
+                "e3326f66aaaa20b7",
+                "38f619d7825eff42",
+                "91a499ddbd5b2be4",
+                "efb76a3157cc49bb"
+            ]
+        ]
+    },
+    {
+        "id": "6c72e164d03c65d5",
+        "type": "debug",
+        "z": "a8b6119049c959c4",
+        "name": "motion payload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "e92f3c43c910049f",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "72a4d085ecf81c5f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Motion :",
+        "format": "{{payload.motion}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 300,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "a3b7975b9bd3d0ab",
+        "type": "debug",
+        "z": "a8b6119049c959c4",
+        "name": "+1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.params[\"switch:0\"]",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c723c0778ebd6efe",
+        "type": "mqtt in",
+        "z": "a8b6119049c959c4",
+        "name": "Plus1",
+        "topic": "shellyplus1-7c87ce5831b4/events/rpc",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "e9e9357ddad63bd3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 50,
+        "y": 440,
+        "wires": [
+            [
+                "a3b7975b9bd3d0ab"
+            ]
+        ]
+    },
+    {
+        "id": "87111d46d5e83f72",
+        "type": "mqtt out",
+        "z": "a8b6119049c959c4",
+        "name": "Plus1 Push",
+        "topic": "",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e9e9357ddad63bd3",
+        "x": 310,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "758b0ca373f2a73d",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "d": true,
+        "group": "72a4d085ecf81c5f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Time Stamp(Unix Time) :",
+        "format": "{{payload.timestamp }}",
+        "layout": "row-left",
+        "className": "",
+        "x": 350,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "efb76a3157cc49bb",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "72a4d085ecf81c5f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Battery Life :",
+        "format": "{{payload.bat}} %",
+        "layout": "row-left",
+        "className": "",
+        "x": 310,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "38f619d7825eff42",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "72a4d085ecf81c5f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Vibration:",
+        "format": "{{payload.vibration}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 300,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "e3326f66aaaa20b7",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "72a4d085ecf81c5f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Active :",
+        "format": "{{payload.active}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 300,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "91a499ddbd5b2be4",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "72a4d085ecf81c5f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Lux :",
+        "format": "{{payload.lux}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 290,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "cda410ef510c39a5",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "d": true,
+        "group": "72a4d085ecf81c5f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Time Stamp2 :",
+        "format": "{{payload.timestamp | date:'shortTime'}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 320,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "0f81f358e58ad627",
+        "type": "mqtt in",
+        "z": "a8b6119049c959c4",
+        "name": "HT Temperature",
+        "topic": "shellies/shellyht-78B6EB/sensor/temperature",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "e9e9357ddad63bd3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 1140,
+        "wires": [
+            [
+                "89fc48b33837e3ca",
+                "72f798b09a0aaf07"
+            ]
+        ]
+    },
+    {
+        "id": "89fc48b33837e3ca",
+        "type": "debug",
+        "z": "a8b6119049c959c4",
+        "name": "motion payload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "55d46da78722b71e",
+        "type": "debug",
+        "z": "a8b6119049c959c4",
+        "name": "+1pm",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "532783de01facb56",
+        "type": "mqtt in",
+        "z": "a8b6119049c959c4",
+        "name": "Plus1PM",
+        "topic": "shellyplus1pm-7c87ce647f84/events/rpc",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "e9e9357ddad63bd3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 60,
+        "y": 60,
+        "wires": [
+            [
+                "eef0eac76fda6fea"
+            ]
+        ]
+    },
+    {
+        "id": "d250e11ae06dcfb7",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "ba6c4f8457378b94",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Voltage",
+        "format": "{{payload.switch0.voltage| number: 2}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 540,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e71b41fc67c4d8a0",
+        "type": "inject",
+        "z": "a8b6119049c959c4",
+        "name": "Get Status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 180,
+        "wires": [
+            [
+                "9d7dd3a1d726489d"
+            ]
+        ]
+    },
+    {
+        "id": "cfb71c4963ce50af",
+        "type": "ui_gauge",
+        "z": "a8b6119049c959c4",
+        "d": true,
+        "name": "",
+        "group": "ba6c4f8457378b94",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "volts",
+        "format": "{{msg.payload.switch0.voltage}}",
+        "min": 0,
+        "max": "135",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 930,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "a1911b431b6430cd",
+        "type": "ui_switch",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "label": "Plus 1PM Control",
+        "tooltip": "Toggle on and off Shelly 1PM",
+        "group": "ba6c4f8457378b94",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "payload",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"method\":\"Switch.Set\",\"parameters\":{\"id\":0,\"on\":false,\"toggle_after\":2}}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"method\":\"Switch.Set\",\"parameters\":{\"id\":0,\"on\":true,\"toggle_after\":2}}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 450,
+        "y": 280,
+        "wires": [
+            [
+                "9d7dd3a1d726489d"
+            ]
+        ]
+    },
+    {
+        "id": "fce4e7de356390b9",
+        "type": "debug",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "9d7dd3a1d726489d",
+        "type": "shelly-gen2",
+        "z": "a8b6119049c959c4",
+        "hostname": "192.168.1.9",
+        "description": "",
+        "pollinginterval": "2000",
+        "pollstatus": false,
+        "getstatusoncommand": false,
+        "devicetype": "Relay",
+        "outputs": 1,
+        "credentials": {},
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "fce4e7de356390b9",
+                "d250e11ae06dcfb7"
+            ]
+        ]
+    },
+    {
+        "id": "5f2316fb9f53738c",
+        "type": "function",
+        "z": "a8b6119049c959c4",
+        "name": "0 toggle",
+        "func": "msg.payload = {\n    method: \"Switch.Toggle\",\n    parameters : {\n        id : 0,\n    }\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 300,
+        "wires": [
+            [
+                "9d7dd3a1d726489d"
+            ]
+        ]
+    },
+    {
+        "id": "42db90d1956fb82f",
+        "type": "inject",
+        "z": "a8b6119049c959c4",
+        "name": "Toggle",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 70,
+        "y": 240,
+        "wires": [
+            [
+                "5f2316fb9f53738c"
+            ]
+        ]
+    },
+    {
+        "id": "72f798b09a0aaf07",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "bd8f230472c86b3e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperature:",
+        "format": "{{payload}} &#8457",
+        "layout": "row-left",
+        "className": "",
+        "x": 350,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "45ccd813836474f6",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "bd8f230472c86b3e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Humidity :",
+        "format": "{{payload}} %",
+        "layout": "row-left",
+        "className": "",
+        "x": 340,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "c2cc5ccd896e3f16",
+        "type": "ui_text",
+        "z": "a8b6119049c959c4",
+        "group": "bd8f230472c86b3e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Battery :",
+        "format": "{{payload}} %",
+        "layout": "row-left",
+        "className": "",
+        "x": 340,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "24143636e760050a",
+        "type": "mqtt in",
+        "z": "a8b6119049c959c4",
+        "name": "HT Humidity",
+        "topic": "shellies/shellyht-78B6EB/sensor/humidity",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "e9e9357ddad63bd3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 70,
+        "y": 1200,
+        "wires": [
+            [
+                "89fc48b33837e3ca",
+                "45ccd813836474f6"
+            ]
+        ]
+    },
+    {
+        "id": "12f274d37ed61a1d",
+        "type": "mqtt in",
+        "z": "a8b6119049c959c4",
+        "name": "HT Battery",
+        "topic": "shellies/shellyht-78B6EB/sensor/battery",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "e9e9357ddad63bd3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 60,
+        "y": 1260,
+        "wires": [
+            [
+                "c2cc5ccd896e3f16",
+                "89fc48b33837e3ca"
+            ]
+        ]
+    },
+    {
+        "id": "bce1e7991c1787da",
+        "type": "ui_chart",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "group": "ba6c4f8457378b94",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Watts",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "Data arriving in 1 minute",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "15",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 390,
+        "y": 20,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "33f859b3a292d0a8",
+        "type": "change",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.params[\"switch:0\"].aenergy.by_minute[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "bce1e7991c1787da",
+                "55d46da78722b71e"
+            ]
+        ]
+    },
+    {
+        "id": "eef0eac76fda6fea",
+        "type": "function",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "func": "delete msg.topic;\ndelete msg.qos;\ndelete msg.retain;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "33f859b3a292d0a8"
+            ]
+        ]
+    },
+    {
+        "id": "5417070779b38e4f",
+        "type": "ui_template",
+        "z": "a8b6119049c959c4",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 860,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dfbc12b49d14b5dc",
+        "type": "function",
+        "z": "a8b6119049c959c4",
+        "d": true,
+        "name": "round to 2 decimals",
+        "func": "\nvar newMsg = { payload: Math.round((msg.payload + Number.EPSILON) * 100) / 100 };\n\nreturn [newMsg];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b9ccdc75cdd030b",
+        "type": "change",
+        "z": "a8b6119049c959c4",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.switch0.voltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 180,
+        "wires": [
+            [
+                "dfbc12b49d14b5dc"
+            ]
+        ]
+    },
+    {
+        "id": "6d3515b467517025",
+        "type": "ui_group",
+        "name": "Shelly Plus 1",
+        "tab": "45bf876b785715ae",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "e9e9357ddad63bd3",
+        "type": "mqtt-broker",
+        "name": "Odr MQTT Broker",
+        "broker": "192.168.1.3",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "72a4d085ecf81c5f",
+        "type": "ui_group",
+        "name": "Shelly Motion",
+        "tab": "45bf876b785715ae",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "ba6c4f8457378b94",
+        "type": "ui_group",
+        "name": "Shelly Plus 1PM",
+        "tab": "45bf876b785715ae",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "bd8f230472c86b3e",
+        "type": "ui_group",
+        "name": "Shelly H&T",
+        "tab": "45bf876b785715ae",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "45bf876b785715ae",
+        "type": "ui_tab",
+        "name": " ",
+        "icon": "battery_full",
+        "disabled": false,
+        "hidden": false,
+        "info": "Main Dashboard leave unnamed for logo "
+    }
+]
