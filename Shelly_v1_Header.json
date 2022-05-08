@@ -1,0 +1,190 @@
+[
+    {
+        "id": "7d08cba9cfb8e32f",
+        "type": "tab",
+        "label": "Header",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "865d0b99.b9a138",
+        "type": "file in",
+        "z": "7d08cba9cfb8e32f",
+        "name": "Picture Selector",
+        "filename": "/img/shelly_logo_white.png",
+        "format": "",
+        "sendError": true,
+        "allProps": false,
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "ceb9ba8b.116ab8"
+            ]
+        ]
+    },
+    {
+        "id": "6494ee41.b0cb7",
+        "type": "function",
+        "z": "7d08cba9cfb8e32f",
+        "name": "",
+        "func": "msg.filename=\"/img/shelly_logo_white.png\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "865d0b99.b9a138"
+            ]
+        ]
+    },
+    {
+        "id": "ee9a261a.ce2cb8",
+        "type": "inject",
+        "z": "7d08cba9cfb8e32f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 70,
+        "y": 200,
+        "wires": [
+            [
+                "6494ee41.b0cb7",
+                "5e87c3cc.f6607c"
+            ]
+        ]
+    },
+    {
+        "id": "5e87c3cc.f6607c",
+        "type": "function",
+        "z": "7d08cba9cfb8e32f",
+        "name": "Adding File Name",
+        "func": "msg.payload=Number(msg.payload)\nif(msg.payload===0){\n msg.filename=\"/img/shelly_logo_white.png\";\n return msg;\n}\nreturn msg.filename;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "625986a9.f27f58",
+        "type": "http in",
+        "z": "7d08cba9cfb8e32f",
+        "name": "",
+        "url": "/test",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 60,
+        "y": 260,
+        "wires": [
+            [
+                "6494ee41.b0cb7"
+            ]
+        ]
+    },
+    {
+        "id": "db7aa5c6.fefde",
+        "type": "http response",
+        "z": "7d08cba9cfb8e32f",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ceb9ba8b.116ab8",
+        "type": "function",
+        "z": "7d08cba9cfb8e32f",
+        "name": "Set Content-Type header",
+        "func": "msg.headers = { \"Content-Type\":\"image/png\"};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 260,
+        "wires": [
+            [
+                "db7aa5c6.fefde"
+            ]
+        ]
+    },
+    {
+        "id": "875ba213.947bb8",
+        "type": "ui_template",
+        "z": "7d08cba9cfb8e32f",
+        "group": "dabc5db0.16344",
+        "name": "Logo / Clock",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');\n</style>\n<style>\nbody.nr-dashboard-theme {\n    font-family: 'Roboto' !important;\n}\n</style>\n<script id=\"clockScript1\" type=\"text/javascript\">\n\n var clockInterval;\n $(function () {\n if (clockInterval) return;\n\n //add logo\n var div1 = $('<div/>');\n var logo = new Image();\n\n logo.src = '/test'\n logo.height = 45;\n div1[0].style.margin = '10px';\n \n\n div1.append(logo);\n\n //add clock\n var div2 = $('<div/>');\n var p = $('<p/>');\n\n div2.append(p);\n div2[0].style.margin = '10px';\n div1[0].style.marginRight = '70%';\n\n function displayTime() {\n p.text(new Date().toLocaleString());\n }\n \n clockInterval = setInterval(displayTime, 1000);\n\n //add to toolbar when it's available\n var addToToolbarTimer;\n \n function addToToolbar() {\n var toolbar = $('.md-toolbar-tools');\n \n if(!toolbar.length) return;\n \n toolbar.append(div1);\n toolbar.append(div2);\n clearInterval(addToToolbarTimer);\n }\n addToToolbarTimer = setInterval(addToToolbar, 100);\n });\n</script>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "className": "",
+        "x": 910,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5de7cbb4.fa21a4",
+        "type": "comment",
+        "z": "7d08cba9cfb8e32f",
+        "name": "Create http endpoint <nodered>/files/xxx  where xxx is the file name to download",
+        "info": "",
+        "x": 280,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "dabc5db0.16344",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "6c93e7d1.ae7f18",
+        "order": 1,
+        "disp": false,
+        "width": "24",
+        "collapse": false
+    },
+    {
+        "id": "6c93e7d1.ae7f18",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard"
+    }
+]
